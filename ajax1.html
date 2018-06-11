@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+    <br><br>
+    <div id="text"></div>
+
     <button id="button">Get Text File</button>
 
     <script>
@@ -14,19 +17,29 @@
 
         function lT(){
             var xhr = new XMLHttpRequest();
-            xhr.open('GET','sample.txt',true) 
+            xhr.open('GET','sample.txt',true)
 
-            // xhr.onload =function(){
-            //    if(xhr.status == 200){
-            //        console.log(this.responseText)
-            //    }
-            //}
 
-            xhr.onreadystatechange = function(){
-                if(this.readyState == 4 && this.status == 200){
-                    console.log(this.responseText)
+
+            xhr.onload =function(){
+                if(xhr.status == 200){
+                    console.log(this.responseText);
+                    document.getElementById('text').innerHTML = this.responseText;
+                }else if(this.status == 404){
+                    document.getElementById('text').innerHTML = 'Not found';
                 }
             }
+
+            xhr.onerror =function(){
+                console.log('Request Error')
+            }
+
+           //xhr.onreadystatechange = function(){
+            //console.log('READYSTATE: ', xhr.readyState);
+            //if(this.readyState ==4 && this.status == 200){
+              //  console.log(this.responseText)
+            //}
+           //}
 
             xhr.send()
         }
