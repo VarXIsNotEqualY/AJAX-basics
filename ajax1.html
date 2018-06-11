@@ -13,9 +13,19 @@
         document.getElementById('button').addEventListener('click', lT);
 
         function lT(){
-            console.log('button clicked');
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET','sample.txt',true) 
+
+            xhr.onload =function(){
+                if(xhr.status == 200){
+                    console.log(this.responseText)
+                }
+            }
+
+            xhr.send()
         }
 
     </script>
+
 </body>
 </html>
